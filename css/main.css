@@ -11,3 +11,7 @@ footer {
     background-color: black;
     color: white;
 }
+
+.product-item p {
+    width: 600px;
+}

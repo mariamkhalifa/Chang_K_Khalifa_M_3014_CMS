@@ -13,39 +13,41 @@ function getAll($tbl){
     }
 };
 
-// function getSingleMovie($tbl, $col, $id) {
-//     //TODO: refer the function above to finish this one
-//     //make sure it returns only one movie that is filtered by $col = $id
-//     $pdo = Database::getInstance()->getConnection();
+function getSingleProduct($tbl, $col, $id) {
+    //make sure it returns only one movie that is filtered by $col = $id
+    $pdo = Database::getInstance()->getConnection();
 
-//     $queryOne = 'SELECT * FROM '. $tbl .' WHERE '.$col. ' = '.$id;
-//     $results = $pdo->query($queryOne);
+    $queryOne = 'SELECT * FROM '. $tbl .' WHERE '.$col. ' = '.$id;
+    $results = $pdo->query($queryOne);
 
-//     if($results){
-//         return $results;
-//     }else{
-//         return 'There was a problem accessing the info';
-//     }
-// }
+    // echo $queryOne;
+    // exit;
 
-// function getMoviesByFilter($args){
-//     $pdo = Database::getInstance()->getConnection();
+    if($results){
+        return $results;
+    }else{
+        return 'There was a problem accessing the info';
+    }
+}
 
-//     $queryAll = 'SELECT * FROM '. $args['tbl'].' AS t,';
-//     $queryAll .= ' '. $args['tbl2'].' AS t2,';
-//     $queryAll .= ' '. $args['tbl3'].' AS t3';
-//     $queryAll .= ' WHERE t.'. $args['col'].' = t3.'.$args['col'];
-//     $queryAll .= ' AND t2.'. $args['col2'].' = t3.'.$args['col2'];
-//     $queryAll .= ' AND t2.'. $args['col3'].' = "'.$args['filter'].'"';
+function getProductsByFilter($args){
+    $pdo = Database::getInstance()->getConnection();
 
-//     // echo $queryAll;
-//     // exit;
+    $queryAll = 'SELECT * FROM '. $args['tbl'].' AS t,';
+    $queryAll .= ' '. $args['tbl2'].' AS t2,';
+    $queryAll .= ' '. $args['tbl3'].' AS t3';
+    $queryAll .= ' WHERE t.'. $args['col'].' = t3.'.$args['col'];
+    $queryAll .= ' AND t2.'. $args['col2'].' = t3.'.$args['col2'];
+    $queryAll .= ' AND t2.'. $args['col3'].' = "'.$args['filter'].'"';
 
-//     $results = $pdo->query($queryAll);
+    // echo $queryAll;
+    // exit;
 
-//     if($results){
-//         return $results;
-//     }else{
-//         return 'There was a problem accessing the info';
-//     }
-// }
+    $results = $pdo->query($queryAll);
+
+    if($results){
+        return $results;
+    }else{
+        return 'There was a problem accessing the info';
+    }
+}
