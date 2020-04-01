@@ -13,6 +13,8 @@
             'col3'=>'category_name',
             'filter'=>$_GET['filter']
         );
+        //$products_table = 'tbl_products';
+        //$getProducts = getAll($products_table);
         $getProducts = getProductsByFilter($args);
         $categories_table = 'tbl_categories';
         $getCategories = getAll($categories_table);

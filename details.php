@@ -8,6 +8,8 @@
         $col = 'product_id';
 
         $getProduct = getSingleProduct($products_table, $col, $id);
+        $categories_table = 'tbl_categories';
+        $getCategories = getAll($categories_table);
     }
 ?>
 
