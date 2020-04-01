@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 31, 2020 at 03:16 AM
+-- Generation Time: Apr 01, 2020 at 03:46 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -23,49 +23,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl-users`
---
-
-CREATE TABLE `tbl-users` (
-  `id` int(11) NOT NULL,
-  `full_name` varchar(250) NOT NULL,
-  `username` varchar(250) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `email` varchar(250) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ip` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl-users`
---
-
-INSERT INTO `tbl-users` (`id`, `full_name`, `username`, `password`, `email`, `date`, `ip`) VALUES
-(1, 'mk', 'mk', '111', 'mk@test.ca', '2020-03-31 03:13:46', '');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_categories`
 --
 
 CREATE TABLE `tbl_categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_categories`
 --
 
-INSERT INTO `tbl_categories` (`id`, `name`) VALUES
+INSERT INTO `tbl_categories` (`category_id`, `category_name`) VALUES
 (1, 'Shoes and Footwear'),
-(2, 'jackets, coats and vests'),
-(4, 'tops and hoodies'),
-(5, 'pants, tights and dresses'),
-(6, 'socks and underwear'),
-(7, 'boardshorts and swimwear'),
-(8, 'accessories');
+(2, 'Jackets, Coats and Vests'),
+(4, 'Tops and Hoodies'),
+(5, 'Pants, Tights and Dresses'),
+(6, 'Socks and Underwear'),
+(7, 'Boardshorts and Swimwear'),
+(8, 'Accessories');
 
 -- --------------------------------------------------------
 
@@ -74,19 +51,19 @@ INSERT INTO `tbl_categories` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `tbl_products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(250) NOT NULL,
-  `price` varchar(20) NOT NULL,
-  `image` varchar(250) NOT NULL,
-  `description` text NOT NULL,
-  `specifictions` varchar(50) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(250) NOT NULL,
+  `product_price` varchar(20) NOT NULL,
+  `product_image` varchar(250) NOT NULL,
+  `product_description` text NOT NULL,
+  `product_specifications` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_products`
 --
 
-INSERT INTO `tbl_products` (`id`, `name`, `price`, `image`, `description`, `specifictions`) VALUES
+INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_price`, `product_image`, `product_description`, `product_specifications`) VALUES
 (1, 'adidas Men\'s Questar Flow Shoes - Black', '$109.99', 'men-black-sneakers.png', 'Ready for the streets. These shoes borrow their modern look and feel from lightweight runners. They have a flexible knit upper with floating 3-Stripes integrated into the lacing system. Pillow-soft midsole and outsole cushioning provides all-day comfort.', 'Vendor Product Number: F36255'),
 (2, 'Merrell Men\'s Ashford Classic Chukka Leather Boots - Butternut', '$179.99', 'men-casual-brown.png', 'Designed to stand the test of time, The Ashford Classic Chukka Leather gives a nod to our heritage. Featuring premium leather and an M Select™ GRIP outsole.', 'Vendor Product Number: J11077'),
 (4, 'Merrell Boys\' Outback Low Pre-School Hiking Shoes - Blue', '$54.99', 'kid-sneakers.png', 'Hitting the trail or the playground, Merrell’s Outback Low shoe is designed to keep up with kids. An easy hook and loop closure, plus comfy EVA footbed, and a slip and trip resistant outsole make it the ideal summer shoe for your active adventurer.', 'Vendor Product Number: MK262285'),
@@ -106,22 +83,23 @@ INSERT INTO `tbl_products` (`id`, `name`, `price`, `image`, `description`, `spec
 (18, 'Under Armour Men\'s Rival Fleece Logo Jogger Pants', '$30.00', 'men-pants.png', 'There are no rivals when it comes to comfortable sweatpants. The UA Rival Fleece Joggers are those go-to pants for rest days or weekends with the boys.', 'Vendor Style Number: 1345634'),
 (19, 'Nike Women\'s Yoga Tights - Black', '$80.00', 'women-leggings.png', 'Bring confidence to your practice with the Nike Yoga Tights. They combine quick-drying fabric with plenty of stretch to let you move through your flow with ease.', 'Vendor Style Number: BV5715-010'),
 (20, 'O\'Neill Women\'s Bryson Button Front Dress - Blush', '$35.97', 'women-dress.png', 'Whether you’re strolling the shore at sunset or heading out for lunch with friends, the O’Neill Women’s Bryson Button Front Dress - Blush will have you looking and feeling your best. This dress has a classic shirt-inspired look with a collar and full-length buttons and is made out of soft viscose material.', 'Vendor Style Number: FA9416004C-BSH'),
-(21, 'Under Armour Girls\' 4-6X Emoji Best Life Capri Tight', '$31.99', 'girl-tights.png', 'The UA Girls’ 4-6X Emoji Best Life Capri Tights have a standard fit, perfect to keep her comfortable in the house and outside playing. ', ''),
+(21, 'Under Armour Girls\' 4-6X Emoji Best Life Capri Tight', '$31.99', 'girl-tights.png', 'The UA Girls’ 4-6X Emoji Best Life Capri Tights have a standard fit, perfect to keep her comfortable in the house and outside playing. ', NULL),
 (22, 'Nike Men\'s NSW Futura Crew Sock - 3 Pack - Black', '$15.00', 'men-socks.png', 'The Nike Sportswear Crew Socks feature stretchy fabric that molds to your foot and a soft cotton blend for all-day comfort.', 'Vendor Style Number: SK0109-010-L'),
 (23, 'Nike Pro Women\'s Classic T Back Sports Bra', '$35.97', 'women-sportsbra.png', 'The Nike Classic Pro T-Back Sports Bra updates a classic silhouette, adding a T-back design for breathable style that lets you move freely. Sweat-wicking technology and a back mesh panel help keep you dry and comfortable during high-intensity workouts such as spin and running.', 'Vendor Style Number: AQ0150-010'),
 (24, 'Ripzone Boys\' Freestyle Boxer Brief Underwear - 2 Pack - Novelty', '$14.97', 'boy-underwear.png', 'Ripzone wants you to forget about your underwear. Get yourself in a pair of breathable ‘Freestyles’and go about your business with uninterrupted confidence. Designed with your needs in mind, Ripzone underwear supports you where it counts.', 'Vendor Style Number: 7903F003-9048% '),
 (25, 'Quiksilver Men\'s Slab Volley Shorts - Hibiscus', '$49.99', 'men-swimwear.png', 'Hit the beach for surf and sand in the Quiksilver Men’s Slab volley short with mesh lining and side pockets.', 'Vendor Style Number: AQYJV03076-RMZ6'),
 (26, 'Speedo Women\'s Endurance Side Shirred Tank Plus Size Swimsuit', '$94.99', 'women-swimwear.png', 'Daily swimmers and casual water lovers alike will benefit from this performance-enhanced swimsuit designed to flatter. Endurance+ engineering delivers chlorine-resistant fabric with four-way stretch for a long-lasting fit that won’t sag or bag. Built-in cups provide smooth support and coverage, while shirred sides and placed compression technology at the waist create a slimming effect.', 'Vendor Style Number: 7234014-001'),
 (27, 'Nike Swim Girls\' Racerback 1 Piece Swimsuit', '$37.50', 'girl-swimwear.png', 'The Girls\' Nike Swim Racerback Sport One Piece embodies ultimate performance in a lightweight one-piece swimsuit. Stretch fabric moves with you to provide a contoured shape and racerback straps give you enhanced support and optimal range of motion.', 'Vendor Style Number: NESS8600'),
-(28, 'Fitbit Versa 2 Smartwatch - Carbon', '$249.95', 'men-watch.png', 'Meet Fitbit Versa 2​™​—a smartwatch that elevates every moment. Use your voice to create alarms, set bedtime reminders or check the weather with Amazon Alexa Built-in.​ Take your look from the gym to the office with its modern and versatile design. Control your favourite playlists and podcasts with Spotify. ​Plus get Fitbit Pay​™​, daily in-app sleep quality scores, notifications, 24/7 heart rate and store 300+ songs for an experience that revolves around you.', ''),
+(28, 'Fitbit Versa 2 Smartwatch - Carbon', '$249.95', 'men-watch.png', 'Meet Fitbit Versa 2​™​—a smartwatch that elevates every moment. Use your voice to create alarms, set bedtime reminders or check the weather with Amazon Alexa Built-in.​ Take your look from the gym to the office with its modern and versatile design. Control your favourite playlists and podcasts with Spotify. ​Plus get Fitbit Pay​™​, daily in-app sleep quality scores, notifications, 24/7 heart rate and store 300+ songs for an experience that revolves around you.', NULL),
 (29, 'The North Face Women\'s Purrl Stitch Beanie - Blue', '$34.99', 'women-hat.png', 'The North Face Purrl Stich Beanie is a slouchy smooth-knit beanie with a double layer cuff delivers style and warmth when the temperature drops.', '100% acrylic yarn'),
 (30, 'Dakine Kids\' Campus Mini 18L Backpack - Pine', '$33.97', 'kid-backpack.png', 'The Dakine Campus Mini offers features of our popular Campus pack scaled down to the elementary basics in a grom-friendly size. This 18L (1,100 cubic inch) kids’ backpack features a roomy main compartment with additional storage in the dual zippered front compartments, including the front cooler pocket for snacks and drinks. The Campus Mini features safety reflective details as well as a sternum strap to balance the load.', '500/1000D Waxed Nylon ( Pine Trees )'),
-(31, 'Fitbit Inspire HR Fitness Tracker - Lilac', '$129.95', 'women-fitness-tracker.png', 'Fitbit Inspire HR™ is a friendly heart rate & fitness tracker for every day that helps you build healthy habits. This encouraging companion motivates you to reach your weight and fitness goals and even enjoy the journey with 24/7 heart rate, workout features, calorie burn tracking, goal celebrations, sleep stages and up to 5 days of battery life. ', ''),
+(31, 'Fitbit Inspire HR Fitness Tracker - Lilac', '$129.95', 'women-fitness-tracker.png', 'Fitbit Inspire HR™ is a friendly heart rate & fitness tracker for every day that helps you build healthy habits. This encouraging companion motivates you to reach your weight and fitness goals and even enjoy the journey with 24/7 heart rate, workout features, calorie burn tracking, goal celebrations, sleep stages and up to 5 days of battery life. ', NULL),
 (32, 'Kombi Men\'s Original Mitts - Black Crosshatch', '$44.99', 'men-gloves.png', 'Get full value from the lift ticket with waterproof-breathable mitts designed for all-day comfort. Heat pack pockets let you add external warmth for super-cold situations.', '100% nylon'),
-(33, 'Ripzone Men\'s Freestyle Boxer Briefs', '$19.99', 'men-underwear.png', 'Ripzone wants you to forget about your underwear. Get yourself in a pair of breathable ‘Freestyles’ or ‘Icons’ and go about your business with uninterrupted confidence. Designed with your needs in mind, Ripzone underwear supports you where it counts.', ''),
+(33, 'Ripzone Men\'s Freestyle Boxer Briefs', '$19.99', 'men-underwear.png', 'Ripzone wants you to forget about your underwear. Get yourself in a pair of breathable ‘Freestyles’ or ‘Icons’ and go about your business with uninterrupted confidence. Designed with your needs in mind, Ripzone underwear supports you where it counts.', NULL),
 (34, 'Nike Swim Boys\' Just Do It Breaker 8\" Volley Short', '$25.97', 'boy-swimwear.png', 'This Nike Swim Boys’ JDI Breaker 8\" Volley Short makes a splash with bold styling on soft, water-repellent fabric. Comfort features like a stretch waistband, inner drawcord and built-in mesh brief provide support and a great fit.', 'Vendor Style Number: NESS9696'),
 (35, 'adidas Women\'s Superlite No Show Socks - 6-Pack', '$14.97', 'women-socks.png', 'From work to your training session, these socks keep your feet dry. They’re made from sweat-wicking fabric that’s super-light. With a no-show length, they stay hidden inside of trainers.', 'Vendor Style Number: CK0645'),
-(36, 'Parkland Kids\' The Goldie 5L Backpack - Bon Bon', '$17.97', 'girl-backpack.png', 'The new kid on the block. Say hello to the Parkland Goldie, a kids backpack designed with style and sustainability in mind. Thinner straps make putting on and taking off a breeze. The Goldie’s smaller silhouette makes it the ideal “first” backpack for your little one.', '');
+(36, 'Parkland Kids\' The Goldie 5L Backpack - Bon Bon', '$17.97', 'girl-backpack.png', 'The new kid on the block. Say hello to the Parkland Goldie, a kids backpack designed with style and sustainability in mind. Thinner straps make putting on and taking off a breeze. The Goldie’s smaller silhouette makes it the ideal “first” backpack for your little one.', NULL),
+(37, 'Nike Swoosh Headband - Pink Gaze/Oil Grey', '$5.25', 'dc67085d85f9ebbc6d96052893b9d58e.png', 'Stay drier on the court and off it with the Nike Swoosh Headband. Absorbent fabric absorbs perspiration before it can run down into your eyes, and the embroidered Swoosh logo adds style to sports apparel and uniforms.', 'Vendor Style Number: N.000.1544.677');
 
 -- --------------------------------------------------------
 
@@ -130,7 +108,7 @@ INSERT INTO `tbl_products` (`id`, `name`, `price`, `image`, `description`, `spec
 --
 
 CREATE TABLE `tbl_products_categories` (
-  `id` int(11) NOT NULL,
+  `product_category_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -139,7 +117,7 @@ CREATE TABLE `tbl_products_categories` (
 -- Dumping data for table `tbl_products_categories`
 --
 
-INSERT INTO `tbl_products_categories` (`id`, `product_id`, `category_id`) VALUES
+INSERT INTO `tbl_products_categories` (`product_category_id`, `product_id`, `category_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (4, 4, 1),
@@ -174,63 +152,88 @@ INSERT INTO `tbl_products_categories` (`id`, `product_id`, `category_id`) VALUES
 (33, 33, 6),
 (34, 34, 7),
 (35, 35, 6),
-(36, 36, 8);
+(36, 36, 8),
+(37, 37, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_users`
+--
+
+CREATE TABLE `tbl_users` (
+  `user_id` int(11) NOT NULL,
+  `user_full_name` varchar(250) NOT NULL,
+  `user_username` varchar(250) NOT NULL,
+  `user_password` varchar(250) NOT NULL,
+  `user_email` varchar(250) NOT NULL,
+  `user_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_ip` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`user_id`, `user_full_name`, `user_username`, `user_password`, `user_email`, `user_date`, `user_ip`) VALUES
+(4, 'mm', 'mm', '$2y$10$QHqKSwZ3DwGADCc/BWdIpO.8pZaqy9leqBPW18BEHgImIg9ljaSzm', 'mm@mm.test', '2020-04-01 13:51:47', '::1'),
+(5, 'mk', 'mk', '$2y$10$.RtxUw2buquC7NFKerAE.OupmQZOxR16NXx7pG0OR/8uQDWZfGZHi', 'mk@website.ca', '2020-04-01 13:52:47', '::1');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tbl-users`
---
-ALTER TABLE `tbl-users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indexes for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `tbl_products_categories`
 --
 ALTER TABLE `tbl_products_categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`product_category_id`);
+
+--
+-- Indexes for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `tbl-users`
---
-ALTER TABLE `tbl-users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_products_categories`
 --
 ALTER TABLE `tbl_products_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
