@@ -1,6 +1,9 @@
-<?php 
+<?php
+
 function createUser($fname, $username, $password, $email){
     $pdo = Database::getInstance()->getConnection();
+
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $create_user_query = 'INSERT INTO tbl_users (user_full_name, user_username, user_password, user_email)';
     $create_user_query .= ' VALUES(:fname, :username, :password, :email)';
@@ -9,7 +12,7 @@ function createUser($fname, $username, $password, $email){
         array(
             ':fname'=>$fname,
             ':username'=>$username,
-            ':password'=>$password,
+            ':password'=>$hashed_password,
             ':email'=>$email
         )
     );
