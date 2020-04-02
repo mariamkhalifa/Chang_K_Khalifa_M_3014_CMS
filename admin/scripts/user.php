@@ -1,31 +1,38 @@
 <?php
 
-function createUser($fname, $username, $password, $email){
+function createUser($fname, $username, $password, $newpassword, $email){
     $pdo = Database::getInstance()->getConnection();
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $create_user_query = 'INSERT INTO tbl_users (user_full_name, user_username, user_password, user_email)';
-    $create_user_query .= ' VALUES(:fname, :username, :password, :email)';
-    $create_user_set = $pdo->prepare($create_user_query);
-    $create_user_result = $create_user_set->execute(
-        array(
-            ':fname'=>$fname,
-            ':username'=>$username,
-            ':password'=>$hashed_password,
-            ':email'=>$email
-        )
-    );
-
-    //echo $create_user_query;exit;
     
-    // redirect to the index.php
-    // Otherwise, return a error message
+    if(password_verify($password,$hashed_password)){
 
-    if($create_user_result){
-        redirect_to('index.php');
-    }else{
-        return 'User could not be created! Try again!';
+        $verified_password = $hashed_password;
+
+        $hashed_new_password = password_hash($newpassword, PASSWORD_DEFAULT);
+
+        $create_user_query = 'INSERT INTO tbl_users (user_full_name, user_username, user_password, user_email)';
+        $create_user_query .= ' VALUES(:fname, :username, :password, :email)';
+        $create_user_set = $pdo->prepare($create_user_query);
+        $create_user_result = $create_user_set->execute(
+            array(
+                ':fname'=>$fname,
+                ':username'=>$username,
+                ':password'=>$hashed_new_password,
+                ':email'=>$email
+            )
+        );
+
+        //echo $create_user_query;exit;
+        
+        // redirect to the index.php
+        // Otherwise, return a error message
+
+        if($create_user_result){
+            redirect_to('index.php');
+        }else{
+            return 'User could not be created! Try again!';
+        }
     }
 }
 
@@ -69,6 +76,8 @@ function editUser($id, $fname, $username, $password, $email){
     //TODO: get the database connection
     $pdo = Database::getInstance()->getConnection();
 
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
     //TODO: Run the proper SQL query to update tbl_user
     $update_user_query = 'UPDATE tbl_users SET user_full_name=:fname, user_username=:username';
     $update_user_query .= ', user_password=:password, user_email=:email';
@@ -78,7 +87,7 @@ function editUser($id, $fname, $username, $password, $email){
         array(
             ':fname'=>$fname,
             ':username'=>$username,
-            ':password'=>$password,
+            ':password'=>$hashed_password,
             ':email'=>$email,
             ':id'=>$id
         )

@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         'price'    => trim($_POST['price']),
         'description'     => trim($_POST['description']),
         'specifications'   => trim($_POST['specifications']),
-        'category' => trim($_POST['categoryList']),
+        'category' => trim($_POST['categoryList'])
     );
 
     $result  = addProduct($product);
@@ -22,6 +22,9 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php include 'head.php'; ?>
+
+    <h2 class="mt-5 text-center">Admin Panel</h2>
+    <h3 class="mt-4 text-center">Add Product</h3>
 
     <?php echo !empty($message) ? $message : ''; ?>
     <form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_addproduct.php" method="post" enctype="multipart/form-data">
