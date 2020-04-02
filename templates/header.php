@@ -15,11 +15,11 @@
         <a href="admin/index.php" class="btn btn-dark text-white">Admin Area</a>
     </div>
     <nav class="filterNav">
-        <ul class="d-flex justify-content-between mx-5 py-4 list-unstyled">
-        <li><a class="text-white" href="index.php">All</a></li>
+        <ul class="d-flex justify-content-between mx-3 py-4 list-unstyled">
+        <li><a class="text-white mx-1" href="index.php">All</a></li>
         <?php while($row = $getCategories->fetch(PDO::FETCH_ASSOC)):?>
             <li>
-                <a class="text-white" href="index.php?filter=<?php echo $row['category_name']; ?>">
+                <a class="text-white mx-1" href="index.php?filter=<?php echo $row['category_name']; ?>">
                     <?php echo $row['category_name']; ?>
                 </a>
             </li>
