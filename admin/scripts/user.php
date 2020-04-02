@@ -1,15 +1,13 @@
 <?php
 
-function createUser($fname, $username, $password, $newpassword, $email){
+function createUser($fname, $username, $password, $email){
     $pdo = Database::getInstance()->getConnection();
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
     if(password_verify($password,$hashed_password)){
 
-        $verified_password = $hashed_password;
-
-        $hashed_new_password = password_hash($newpassword, PASSWORD_DEFAULT);
+        //$verified_password = $hashed_password;
 
         $create_user_query = 'INSERT INTO tbl_users (user_full_name, user_username, user_password, user_email)';
         $create_user_query .= ' VALUES(:fname, :username, :password, :email)';
@@ -18,7 +16,7 @@ function createUser($fname, $username, $password, $newpassword, $email){
             array(
                 ':fname'=>$fname,
                 ':username'=>$username,
-                ':password'=>$hashed_new_password,
+                ':password'=>$hashed_password,
                 ':email'=>$email
             )
         );
@@ -72,26 +70,31 @@ function getAllUsers(){
     }
 }
 
-function editUser($id, $fname, $username, $password, $email){
+function editUser($id, $fname, $username, $password, $newpassword, $email){
     //TODO: get the database connection
     $pdo = Database::getInstance()->getConnection();
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    //TODO: Run the proper SQL query to update tbl_user
-    $update_user_query = 'UPDATE tbl_users SET user_full_name=:fname, user_username=:username';
-    $update_user_query .= ', user_password=:password, user_email=:email';
-    $update_user_query .= ' WHERE user_id=:id';
-    $update_user_set = $pdo->prepare($update_user_query);
-    $update_user_result = $update_user_set->execute(
-        array(
-            ':fname'=>$fname,
-            ':username'=>$username,
-            ':password'=>$hashed_password,
-            ':email'=>$email,
-            ':id'=>$id
-        )
-    );
+    if(password_verify($password,$hashed_password)){
+
+        $hashed_new_password = password_hash($newpassword, PASSWORD_DEFAULT);
+
+        //TODO: Run the proper SQL query to update tbl_user
+        $update_user_query = 'UPDATE tbl_users SET user_full_name=:fname, user_username=:username';
+        $update_user_query .= ', user_password=:password, user_email=:email';
+        $update_user_query .= ' WHERE user_id=:id';
+        $update_user_set = $pdo->prepare($update_user_query);
+        $update_user_result = $update_user_set->execute(
+            array(
+                ':fname'=>$fname,
+                ':username'=>$username,
+                ':password'=>$hashed_new_password,
+                ':email'=>$email,
+                ':id'=>$id
+            )
+        );
+    }
 
     //TODO: if the update SQL query went through redirect user to index.php
     //Otherwise return some error message

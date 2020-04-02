@@ -29,22 +29,22 @@ if (isset($_POST['submit'])) {
     <?php echo !empty($message) ? $message : ''; ?>
     <form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_addproduct.php" method="post" enctype="multipart/form-data">
         <label>Product Image:</label>
-        <input class="p-1" type="file" name="image" value="">
+        <input class="p-1" type="file" name="image" value="" required>
 
         <label class="mt-2">Product Name:</label>
-        <input class="p-1" type="text" name="name" value="">
+        <input class="p-1" type="text" name="name" value="" required>
 
         <label class="mt-2">Product Price:</label>
-        <input class="p-1" type="text" name="price" value="">
+        <input class="p-1" type="text" name="price" value="" required>
 
         <label class="mt-2">Product Description:</label>
-        <input class="p-1" type="text" name="description" value="">
+        <input class="p-1" type="text" name="description" value="" required>
 
         <label class="mt-2">Product Specifications</label>
         <input class="p-1" type="text" name="specifications" value="">
 
         <label class="mt-2">Product Category:</label>
-        <select name="categoryList">
+        <select name="categoryList" required>
             <option>Please select a product category..</option>
             <?php while ($row = $categories->fetch(PDO::FETCH_ASSOC)): ?>
                 <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name']; ?></option>

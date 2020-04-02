@@ -87,7 +87,11 @@ function getCurrentProduct($product_id){
             ':id'=>$product_id
         )
     );
-        
+
+    //echo $get_product_query;
+  //echo $_SESSION['product_id'];
+    // echo $get_product_set->debugDumpParams();
+    // exit;
     if($get_product_result && $get_product_set->rowCount()){
 
         $product_info = $get_product_set->fetch(PDO::FETCH_ASSOC);
@@ -120,10 +124,10 @@ function deleteProduct($product_id){
     }
 }
 
-function updateProduct($product, $product_id){
+function updateProduct($product){
 
-    var_dump($product_id);
-    exit;
+    // var_dump($product_id);
+    // exit;
 
     try {
         // 1. Connect to the DB
@@ -150,6 +154,8 @@ function updateProduct($product, $product_id){
         }
 
         // 4. Insert into DB
+        $last_uploaded_id = $pdo->lastInsertId();
+
         $update_product_query = 'UPDATE tbl_products SET product_image=:product_image, product_name=:product_name, product_price=:product_price';
         $update_product_query .= ', product_description=:product_description, product_specifications=:product_specifications';
         $update_product_query .= ' WHERE product_id=:product_id';
@@ -162,18 +168,20 @@ function updateProduct($product, $product_id){
                 ':product_price'      => $product['price'],
                 ':product_description'   => $product['description'],
                 ':product_specifications' => $product['specifications'],
-                'product_id' => $product_id
+                ':product_id' => $product['id']
             )
         );
 
-        if ($insert_product_result) {
+        //var_dump($update_product_query);echo $product['id']; exit;
+
+        if ($update_product_result) {
             $update_category_query = 'UPDATE tbl_products_categories SET category_id=:category_id, product_id=:product_id';
             $update_category       = $pdo->prepare($update_category_query);
 
             $update_category_result = $update_category->execute(
                 array(
                     ':category_id'  => $product['category'],
-                    'product_id' => $product_id
+                    ':product_id' => $last_uploaded_id
                 )
             );
         }

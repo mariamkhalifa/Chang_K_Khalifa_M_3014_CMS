@@ -2,17 +2,17 @@
 require_once '../load.php';
 confirm_logged_in();
 
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $_SESSION['product_id'] = $id;
-    $product_id = $_SESSION['product_id'];
+if(isset($_GET['id'])) {
+    $product_id = $_GET['id'];
+    $current_product = getCurrentProduct($product_id);
+    if(!$current_product){
+        $message = 'Failed to get product info!';
+    }
 }
 
-$current_product = getCurrentProduct($product_id);
 
-if(!$current_product){
-    $message = 'Failed to get product info!';
-}
+//$_SESSION['product_id'] = $id;
+//$product_id = $_SESSION['product_id'];
 
 $categories_table = 'tbl_categories';
 $categories = getAll($categories_table);
@@ -24,10 +24,11 @@ if (isset($_POST['submit'])) {
         'price'    => trim($_POST['price']),
         'description'     => trim($_POST['description']),
         'specifications'   => trim($_POST['specifications']),
-        'category' => trim($_POST['categoryList'])
+        'category' => trim($_POST['categoryList']),
+        'id' => $_POST['id']
     );
 
-    $result  = updateProduct($product, $product_id);
+    $result  = updateProduct($product);
     $message = $result;
 }
 
@@ -46,19 +47,22 @@ if (isset($_POST['submit'])) {
         
         <img src="../images/<?php echo $product_info['product_image'];?>" alt="Current Product Image" class="product-image-thumb">
 
-        <label>Product Image:</label>
-        <input class="p-1" type="file" name="image" value="">
+        <label class="mt-2">Product ID:</label>
+        <input class="p-1" type="text" name="id" value="<?php echo $product_info['product_id'];?>">
 
-        <label>Name:</label>
+        <label>Product Image:</label>
+        <input class="p-1" type="file" name="image" value="<?php echo $product_info['product_image'];?>">
+
+        <label class="mt-2">Name:</label>
         <input class="p-1" type="text" name="name" value="<?php echo $product_info['product_name'];?>">
 
-        <label class="p-1">Price:</label>
+        <label class="mt-2">Price:</label>
         <input class="p-1" type="text" name="price" value="<?php echo $product_info['product_price'];?>">
 
-        <label class="p-1">Description:</label>
+        <label class="mt-2">Description:</label>
         <input class="p-1" type="text" name="description" value="<?php echo $product_info['product_description'];?>">
 
-        <label class="p-1">Specifications:</label>
+        <label class="mt-2">Specifications:</label>
         <input class="p-1" type="text" name="specifications" value="<?php echo $product_info['product_specifications'];?>">
 
         <label class="mt-2">Product Category:</label>
