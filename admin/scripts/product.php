@@ -87,10 +87,15 @@ function getCurrentProduct($product_id){
             ':id'=>$product_id
         )
     );
-
-    // echo $get_product_set->debugDumpParams();
-    // exit;
+        
     if($get_product_result && $get_product_set->rowCount()){
+
+        $product_info = $get_product_set->fetch(PDO::FETCH_ASSOC);
+        $product_id = $product_info['product_id'];
+        
+        var_dump($product_id);
+        exit;
+
         return $get_product_set;
     }else{
         return false;

@@ -25,7 +25,16 @@
         $getCategories = getAll($categories_table);
     }
 
-    
+    if(isset($_POST['submit'])){
+        $searchq = trim($_POST['search']);
+
+        if(!empty($searchq)){
+            //pass in value
+            $message = search($searchq);
+        }else{
+            $message = 'Please enter a product name';
+        }
+    }
 ?>
 
 
