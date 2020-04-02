@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 01, 2020 at 03:46 PM
+-- Generation Time: Apr 02, 2020 at 12:10 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -99,7 +99,8 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_price`, `prod
 (34, 'Nike Swim Boys\' Just Do It Breaker 8\" Volley Short', '$25.97', 'boy-swimwear.png', 'This Nike Swim Boys’ JDI Breaker 8\" Volley Short makes a splash with bold styling on soft, water-repellent fabric. Comfort features like a stretch waistband, inner drawcord and built-in mesh brief provide support and a great fit.', 'Vendor Style Number: NESS9696'),
 (35, 'adidas Women\'s Superlite No Show Socks - 6-Pack', '$14.97', 'women-socks.png', 'From work to your training session, these socks keep your feet dry. They’re made from sweat-wicking fabric that’s super-light. With a no-show length, they stay hidden inside of trainers.', 'Vendor Style Number: CK0645'),
 (36, 'Parkland Kids\' The Goldie 5L Backpack - Bon Bon', '$17.97', 'girl-backpack.png', 'The new kid on the block. Say hello to the Parkland Goldie, a kids backpack designed with style and sustainability in mind. Thinner straps make putting on and taking off a breeze. The Goldie’s smaller silhouette makes it the ideal “first” backpack for your little one.', NULL),
-(37, 'Nike Swoosh Headband - Pink Gaze/Oil Grey', '$5.25', 'dc67085d85f9ebbc6d96052893b9d58e.png', 'Stay drier on the court and off it with the Nike Swoosh Headband. Absorbent fabric absorbs perspiration before it can run down into your eyes, and the embroidered Swoosh logo adds style to sports apparel and uniforms.', 'Vendor Style Number: N.000.1544.677');
+(37, 'Nike Swoosh Headband - Pink Gaze/Oil Grey', '$5.25', 'dc67085d85f9ebbc6d96052893b9d58e.png', 'Stay drier on the court and off it with the Nike Swoosh Headband. Absorbent fabric absorbs perspiration before it can run down into your eyes, and the embroidered Swoosh logo adds style to sports apparel and uniforms.', 'Vendor Style Number: N.000.1544.677'),
+(43, 'Test', '0', '485ae925ee2114817f997fa32d158d71.png', 'Test', 'Test');
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,11 @@ INSERT INTO `tbl_products_categories` (`product_category_id`, `product_id`, `cat
 (34, 34, 7),
 (35, 35, 6),
 (36, 36, 8),
-(37, 37, 8);
+(37, 37, 8),
+(38, 38, 1),
+(39, 39, 1),
+(40, 40, 1),
+(41, 43, 1);
 
 -- --------------------------------------------------------
 
@@ -176,8 +181,8 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_full_name`, `user_username`, `user_password`, `user_email`, `user_date`, `user_ip`) VALUES
-(4, 'mm', 'mm', '$2y$10$QHqKSwZ3DwGADCc/BWdIpO.8pZaqy9leqBPW18BEHgImIg9ljaSzm', 'mm@mm.test', '2020-04-01 13:51:47', '::1'),
-(5, 'mk', 'mk', '$2y$10$.RtxUw2buquC7NFKerAE.OupmQZOxR16NXx7pG0OR/8uQDWZfGZHi', 'mk@website.ca', '2020-04-01 13:52:47', '::1');
+(4, 'mm', 'mm', '111', 'mm@mm.test', '2020-04-01 13:51:47', '::1'),
+(7, 'Kayla', 'kc', '$2y$10$RTQxCt/azLQyruJNe8pja.SvdUdHV5nb36TqGQILXhUxN1JlqnR7e', '111', '2020-04-01 18:25:54', '::1');
 
 --
 -- Indexes for dumped tables
@@ -221,19 +226,19 @@ ALTER TABLE `tbl_categories`
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tbl_products_categories`
 --
 ALTER TABLE `tbl_products_categories`
-  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
