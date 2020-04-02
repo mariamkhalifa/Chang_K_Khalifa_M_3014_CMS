@@ -1,12 +1,80 @@
-<?php
+<?php 
 require_once '../load.php';
 confirm_logged_in();
 
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $_SESSION['product_id'] = $id;
+    $product_id = $_SESSION['product_id'];
+}
+
+$current_product = getCurrentProduct($product_id);
+
+if(!$current_product){
+    $message = 'Failed to get product info!';
+}
+
+$categories_table = 'tbl_categories';
+$categories = getAll($categories_table);
+
+if (isset($_POST['submit'])) {
+    $product = array(
+        'image'   => $_FILES['image'],
+        'name'   => trim($_POST['name']),
+        'price'    => trim($_POST['price']),
+        'description'     => trim($_POST['description']),
+        'specifications'   => trim($_POST['specifications']),
+        'category' => trim($_POST['categoryList'])
+    );
+
+    $result  = updateProduct($product, $product_id);
+    $message = $result;
+}
+
 ?>
+
 
 <?php include 'head.php'; ?>
 
+    <h2 class="mt-5 text-center">Admin Panel</h2>
+    <h3 class="mt-4 text-center">Update Product</h3>
+
+<?php echo !empty($message)? $message:'';?>
+<form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_updateproduct.php" method="post" enctype="multipart/form-data">
+    <?php if ($current_product):?>
+        <?php while($product_info = $current_product->fetch(PDO::FETCH_ASSOC)):?>
+        
+        <img src="../images/<?php echo $product_info['product_image'];?>" alt="Current Product Image" class="product-image-thumb">
+
+        <label>Product Image:</label>
+        <input class="p-1" type="file" name="image" value="">
+
+        <label>Name:</label>
+        <input class="p-1" type="text" name="name" value="<?php echo $product_info['product_name'];?>">
+
+        <label class="p-1">Price:</label>
+        <input class="p-1" type="text" name="price" value="<?php echo $product_info['product_price'];?>">
+
+        <label class="p-1">Description:</label>
+        <input class="p-1" type="text" name="description" value="<?php echo $product_info['product_description'];?>">
+
+        <label class="p-1">Specifications:</label>
+        <input class="p-1" type="text" name="specifications" value="<?php echo $product_info['product_specifications'];?>">
+
+        <label class="mt-2">Product Category:</label>
+        <select name="categoryList">
+            <option>Please select a product category..</option>
+            <?php while ($row = $categories->fetch(PDO::FETCH_ASSOC)):?>
+                <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name']; ?></option>
+            <?php endwhile;?>
+        </select>
+
+        <button class="btn btn-dark mt-4 p-3" type="submit" name="submit">Update Product</button>
+        <?php endwhile;?>
+    <?php endif;?>
+</form>
 
 <?php include 'nav.php'; ?>
+    
 </body>
 </html>

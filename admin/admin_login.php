@@ -21,12 +21,13 @@
     <?php echo !empty($message)?$message:''; ?>
     <form class="border mx-auto p-4 mt-4 d-flex flex-column" action="admin_login.php" method="post">
         <label>Username:</label>
-        <input class="p-1" type="text" name="username" value="" />
+        <input class="p-1" type="text" name="username" value=""/>
 
         <label class="mt-2">Password:</label>
-        <input class="p-1" type="password" name="password" value="" />
+        <input class="p-1" type="password" name="password" value=""/>
 
         <button class="btn btn-dark mt-4 p-3" name="submit">Submit</button>
     </form>
+    <a href="../index.php" class="btn btn-dark text-white back-home">Back Home</a>
 </body>
 </html>

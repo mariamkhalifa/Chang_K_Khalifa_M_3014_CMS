@@ -13,9 +13,10 @@ if(isset($_POST['submit'])){
     $fname = trim($_POST['fname']);
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
+    $newpassword = trim($_POST['newpassword']);
     $email = trim($_POST['email']);
 
-    $message = editUser($id, $fname, $username,$password, $email);
+    $message = editUser($id, $fname, $username,$password, $newpassword, $email);
 }
 ?>
 
@@ -23,7 +24,7 @@ if(isset($_POST['submit'])){
 <?php include 'head.php'; ?>
 
     <h2 class="mt-5 text-center">Admin Panel</h2>
-    <h3 class="mt-4 text-center">Edit User</h3>
+    <h3 class="mt-4 text-center">Edit Account</h3>
 
 <?php echo !empty($message)? $message:'';?>
 <form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_edituser.php" method="post">
@@ -35,11 +36,14 @@ if(isset($_POST['submit'])){
         <label class="p-1">Username:</label>
         <input class="p-1" type="text" name="username" value="<?php echo $user_info['user_username'];?>">
 
-        <label class="p-1">Password:</label>
-        <input class="p-1" type="text" name="password" value="<?php echo $user_info['user_password'];?>">
-
         <label class="p-1">Email:</label>
         <input class="p-1" type="email" name="email" value="<?php echo $user_info['user_email'];?>">
+
+        <label class="p-1">Verify Password:</label>
+        <input class="p-1" type="text" name="password">
+
+        <label class="p-1">New Password:</label>
+        <input class="p-1" type="text" name="newpassword">
 
         <button class="btn btn-dark mt-4 p-3" type="submit" name="submit">Edit Account</button>
         <?php endwhile;?>

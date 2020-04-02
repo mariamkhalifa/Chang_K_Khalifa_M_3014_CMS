@@ -12,6 +12,18 @@ header {
     background-color: black;
 }
 
+.header-top {
+    display: flex;
+    background-color: #262526;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-top a {
+    max-height: 40px;
+    margin-right: 40px;
+}
+
 form {
     width: 50%;
 }
@@ -23,4 +35,16 @@ footer {
 
 .product-item p {
     width: 600px;
+}
+
+.back-home {
+    margin: 100px 40px 0px 40px;
+}
+
+.product-image-thumb {
+    max-width: 60px;
+}
+
+.products-edit-tbl {
+    max-width: 1100px;
 }

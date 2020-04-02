@@ -10,9 +10,13 @@
 </head>
 <body>
 <header>
-    <img src="images/logo.png" alt="logo">
+    <div class="header-top">
+        <img src="images/logo.png" alt="logo">
+        <a href="admin/index.php" class="btn btn-dark text-white">Admin Area</a>
+    </div>
     <nav class="filterNav">
         <ul class="d-flex justify-content-between mx-5 py-4 list-unstyled">
+        <li><a class="text-white" href="index.php">All</a></li>
         <?php while($row = $getCategories->fetch(PDO::FETCH_ASSOC)):?>
             <li>
                 <a class="text-white" href="index.php?filter=<?php echo $row['category_name']; ?>">
@@ -20,7 +24,6 @@
                 </a>
             </li>
         <?php endwhile;?>
-            <li><a class="text-white" href="index.php">All</a></li>
         </ul>
     </nav>
 </header>
