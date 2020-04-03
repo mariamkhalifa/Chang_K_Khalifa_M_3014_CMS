@@ -26,11 +26,11 @@
     <form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_createuser.php" method="post">
         <label>Name:</label>
         <input class="p-1" type="text" name="fname" value="">
-        <label class="mt-2">Username:</label>
+        <label class="mt-3">Username:</label>
         <input class="p-1" type="text" name="username" value="">
-        <label class="mt-2">Password:</label>
+        <label class="mt-3">Password:</label>
         <input class="p-1" type="text" name="password" value="">
-        <label class="mt-2">Email:</label>
+        <label class="mt-3">Email:</label>
         <input class="p-1" type="email" name="email" value="">
 
         <button class="btn btn-dark mt-4 p-3" type="submit" name="submit">Create User</button>

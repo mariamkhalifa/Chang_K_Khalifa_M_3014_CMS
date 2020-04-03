@@ -33,16 +33,16 @@ if(isset($_POST['submit'])){
         <label>Name:</label>
         <input class="p-1" type="text" name="fname" value="<?php echo $user_info['user_full_name'];?>">
 
-        <label class="p-1">Username:</label>
+        <label class="mt-3">Username:</label>
         <input class="p-1" type="text" name="username" value="<?php echo $user_info['user_username'];?>">
 
-        <label class="p-1">Email:</label>
+        <label class="mt-3">Email:</label>
         <input class="p-1" type="email" name="email" value="<?php echo $user_info['user_email'];?>">
 
-        <label class="p-1">Verify Password:</label>
+        <label class="mt-3">Verify Password:</label>
         <input class="p-1" type="text" name="password">
 
-        <label class="p-1">New Password:</label>
+        <label class="mt-3">New Password:</label>
         <input class="p-1" type="text" name="newpassword">
 
         <button class="btn btn-dark mt-4 p-3" type="submit" name="submit">Edit Account</button>
