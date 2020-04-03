@@ -2,22 +2,20 @@
 require_once '../load.php';
 confirm_logged_in();
 
+$categories_table = 'tbl_categories';
+$categories = getAll($categories_table);
+
 if(isset($_GET['id'])) {
-    $product_id = $_GET['id'];
-    $current_product = getCurrentProduct($product_id);
+    $selected_product_id = $_GET['id'];
+    $current_product = getCurrentProduct($selected_product_id);
     if(!$current_product){
         $message = 'Failed to get product info!';
     }
 }
 
 
-//$_SESSION['product_id'] = $id;
-//$product_id = $_SESSION['product_id'];
-
-$categories_table = 'tbl_categories';
-$categories = getAll($categories_table);
-
 if (isset($_POST['submit'])) {
+
     $product = array(
         'image'   => $_FILES['image'],
         'name'   => trim($_POST['name']),
@@ -44,11 +42,10 @@ if (isset($_POST['submit'])) {
 <form class="border mx-auto p-4 mt-4 mb-5 d-flex flex-column" action="admin_updateproduct.php" method="post" enctype="multipart/form-data">
     <?php if ($current_product):?>
         <?php while($product_info = $current_product->fetch(PDO::FETCH_ASSOC)):?>
+
+        <input name="id" value="Product ID - <?php echo $product_info['product_id'];?>" readonly class="product-id">
         
         <img src="../images/<?php echo $product_info['product_image'];?>" alt="Current Product Image" class="product-image-thumb">
-
-        <label class="mt-2">Product ID:</label>
-        <input class="p-1" type="text" name="id" value="<?php echo $product_info['product_id'];?>">
 
         <label>Product Image:</label>
         <input class="p-1" type="file" name="image" value="<?php echo $product_info['product_image'];?>">
@@ -67,9 +64,12 @@ if (isset($_POST['submit'])) {
 
         <label class="mt-2">Product Category:</label>
         <select name="categoryList">
-            <option>Please select a product category..</option>
             <?php while ($row = $categories->fetch(PDO::FETCH_ASSOC)):?>
-                <option value="<?php echo $row['category_id'] ?>"><?php echo $row['category_name']; ?></option>
+                <option
+                    <?php if($row['category_name'] == $product_info['category_name']){echo("selected");}?> 
+                    value="<?php echo $row['category_id'] ?>">
+                    <?php echo $row['category_name']; ?>
+                </option>
             <?php endwhile;?>
         </select>
 

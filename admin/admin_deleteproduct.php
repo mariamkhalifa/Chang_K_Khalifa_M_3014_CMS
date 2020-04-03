@@ -1,9 +1,9 @@
 <?php 
     require_once '../load.php';
     confirm_logged_in();
-    
-    $products = getAllProducts();
-    if(!$products){
+
+    $products_with_categories = getAllProducts();
+    if(!$products_with_categories){
         $message = 'Failed to get products list!';
     }
 
@@ -23,12 +23,13 @@
     <h3 class="mt-4 text-center">Edit Products</h3>
 
    <?php echo !empty($message)?$message:'';?>
-   <?php if($products):?>
+   <?php if($products_with_categories):?>
     <table class="border mt-5 mx-auto products-edit-tbl">
             <thead class="border">
                 <tr>
                     <td class="border-right p-2">Product Picture</td>
                     <td class="border-right p-2">Name</td>
+                    <td class="border-right p-2">Category</td>
                     <td class="border-right p-2">Price</td>
                     <td class="border-right p-2">Description</td>
                     <td class="border-right p-2">Specifications</td>
@@ -37,10 +38,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php while($product = $products->fetch(PDO::FETCH_ASSOC)):?>
+                <?php while($product = $products_with_categories->fetch(PDO::FETCH_ASSOC)):?>
                     <tr class="border-bottom">
                         <td class="border-right p-2"><img src="../images/<?php echo $product['product_image'];?>" class="product-image-thumb" alt="Product Image"></td>
                         <td class="border-right p-2"><?php echo $product['product_name'];?></td>
+                        <td class="border-right p-2"><?php echo $product['category_name'];?></td>
                         <td class="border-right p-2"><?php echo $product['product_price'];?></td>
                         <td class="border-right p-2"><?php echo $product['product_description'];?></td>
                         <td class="border-right p-2"><?php echo $product['product_specifications'];?></td>

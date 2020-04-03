@@ -48,3 +48,7 @@ footer {
 .products-edit-tbl {
     max-width: 1100px;
 }
+
+.product-id {
+    border: none;
+}

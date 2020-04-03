@@ -64,35 +64,65 @@ function addProduct($product){
     }
 }
 
-function getAllProducts() {
+function getAllProducts(){
     $pdo = Database::getInstance()->getConnection();
-    $get_product_query = 'SELECT * FROM tbl_products';
-    $product_results = $pdo->query($get_product_query);
-    if($product_results){
-        return $product_results;
+
+    $args = array(
+        'tbl'=>'tbl_products',
+        'tbl2'=>'tbl_categories',
+        'tbl3'=>'tbl_products_categories',
+        'col'=>'product_id',
+        'col2'=>'category_id',
+        'col3'=>'category_name'
+    );
+
+    $queryAll = 'SELECT * FROM '. $args['tbl'].' AS t,';
+    $queryAll .= ' '. $args['tbl2'].' AS t2,';
+    $queryAll .= ' '. $args['tbl3'].' AS t3';
+    $queryAll .= ' WHERE t.'. $args['col'].' = t3.'.$args['col'];
+    $queryAll .= ' AND t2.'. $args['col2'].' = t3.'.$args['col2'];
+
+    // echo $queryAll;
+    // exit;
+
+    $results = $pdo->query($queryAll);
+
+    if($results){
+        return $results;
     }else{
-        return false;
+        return 'There was a problem accessing the info';
     }
 }
 
-function getCurrentProduct($product_id){
+function getCurrentProduct($selected_product_id){
     //TODO: set up database connection
     $pdo = Database::getInstance()->getConnection();
 
-    //TODO: run the proper SQL query to fetch the user based on $id
-    $get_product_query = 'SELECT * FROM tbl_products WHERE product_id = :id';
-    $get_product_set = $pdo->prepare($get_product_query);
+    $args = array(
+        'tbl'=>'tbl_products',
+        'tbl2'=>'tbl_categories',
+        'tbl3'=>'tbl_products_categories',
+        'col'=>'product_id',
+        'col2'=>'category_id',
+        'col3'=>'category_name'
+    );
+
+    $queryAll = 'SELECT * FROM '. $args['tbl'].' AS t,';
+    $queryAll .= ' '. $args['tbl2'].' AS t2,';
+    $queryAll .= ' '. $args['tbl3'].' AS t3';
+    $queryAll .= ' WHERE t.'. $args['col'].' = t3.'.$args['col'];
+    $queryAll .= ' AND t2.'. $args['col2'].' = t3.'.$args['col2'];
+    $queryAll .= ' AND t.'. $args['col'].' = :id';
+
+    $get_product_set = $pdo->prepare($queryAll);
     $get_product_result = $get_product_set->execute(
         array(
-            ':id'=>$product_id
+            ':id'=>$selected_product_id
         )
     );
 
-    //echo $get_product_query;echo $_SESSION['product_id'];exit;
-    // echo $get_product_set->debugDumpParams();
-    // exit;
     if($get_product_result && $get_product_set->rowCount()){
-        return $get_product_set;
+        return $get_product_set;  
     }else{
         return false;
     }
@@ -117,9 +147,6 @@ function deleteProduct($product_id){
 }
 
 function updateProduct($product){
-
-    // var_dump($product_id);
-    // exit;
 
     try {
         // 1. Connect to the DB
@@ -146,7 +173,7 @@ function updateProduct($product){
         }
 
         // 4. Insert into DB
-        $last_uploaded_id = $pdo->lastInsertId();
+        // $last_uploaded_id = $pdo->lastInsertId();
 
         $update_product_query = 'UPDATE tbl_products SET product_image=:product_image, product_name=:product_name, product_price=:product_price';
         $update_product_query .= ', product_description=:product_description, product_specifications=:product_specifications';
@@ -164,16 +191,14 @@ function updateProduct($product){
             )
         );
 
-        //var_dump($update_product_query);echo $product['id']; exit;
-
         if ($update_product_result) {
-            $update_category_query = 'UPDATE tbl_products_categories SET category_id=:category_id, product_id=:product_id';
+            $update_category_query = 'UPDATE tbl_products_categories SET category_id=:category_id, product_id=:product_id WHERE product_id=:product_id';
             $update_category       = $pdo->prepare($update_category_query);
 
             $update_category_result = $update_category->execute(
                 array(
                     ':category_id'  => $product['category'],
-                    ':product_id' => $last_uploaded_id
+                    ':product_id' => $product['id']
                 )
             );
         }

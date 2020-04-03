@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 02, 2020 at 12:10 AM
+-- Generation Time: Apr 03, 2020 at 02:27 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -100,7 +100,7 @@ INSERT INTO `tbl_products` (`product_id`, `product_name`, `product_price`, `prod
 (35, 'adidas Women\'s Superlite No Show Socks - 6-Pack', '$14.97', 'women-socks.png', 'From work to your training session, these socks keep your feet dry. They’re made from sweat-wicking fabric that’s super-light. With a no-show length, they stay hidden inside of trainers.', 'Vendor Style Number: CK0645'),
 (36, 'Parkland Kids\' The Goldie 5L Backpack - Bon Bon', '$17.97', 'girl-backpack.png', 'The new kid on the block. Say hello to the Parkland Goldie, a kids backpack designed with style and sustainability in mind. Thinner straps make putting on and taking off a breeze. The Goldie’s smaller silhouette makes it the ideal “first” backpack for your little one.', NULL),
 (37, 'Nike Swoosh Headband - Pink Gaze/Oil Grey', '$5.25', 'dc67085d85f9ebbc6d96052893b9d58e.png', 'Stay drier on the court and off it with the Nike Swoosh Headband. Absorbent fabric absorbs perspiration before it can run down into your eyes, and the embroidered Swoosh logo adds style to sports apparel and uniforms.', 'Vendor Style Number: N.000.1544.677'),
-(43, 'Test', '0', '485ae925ee2114817f997fa32d158d71.png', 'Test', 'Test');
+(43, 'testchanged', '0', '1e7a1cddb6a3213cc6351867782b527e.png', 'Test', 'Test');
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ INSERT INTO `tbl_products_categories` (`product_category_id`, `product_id`, `cat
 (38, 38, 1),
 (39, 39, 1),
 (40, 40, 1),
-(41, 43, 1);
+(41, 43, 8);
 
 -- --------------------------------------------------------
 
