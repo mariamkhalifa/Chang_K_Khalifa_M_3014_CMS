@@ -26,8 +26,8 @@
         <?php endwhile;?>
         </ul>
     </nav>
-    <form action=”index.php” method=”post”>
-        <input type=”text” name=”search” placeholder="Enter a product name..."/>
+    <form action="index.php" method="get">
+        <input type="text" name="search" placeholder="Enter a product category..." required/>
         <button type="submit" name="submit">Search</button>
     </form>
 </header>

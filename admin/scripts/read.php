@@ -51,3 +51,27 @@ function getProductsByFilter($args){
         return 'There was a problem accessing the info';
     }
 }
+
+function getProductsBySearch($args){
+    $pdo = Database::getInstance()->getConnection();
+
+    $queryAll = 'SELECT * FROM '. $args['tbl'].' AS t,';
+    $queryAll .= ' '. $args['tbl2'].' AS t2,';
+    $queryAll .= ' '. $args['tbl3'].' AS t3';
+    $queryAll .= ' WHERE t.'. $args['col'].' = t3.'.$args['col'];
+    $queryAll .= ' AND t2.'. $args['col2'].' = t3.'.$args['col2'];
+    $queryAll .= ' AND t2.'. $args['col3'].' LIKE :search';
+
+    $get_results = $pdo->prepare($queryAll);
+    $results = $get_results->execute(
+        array(
+            ':search'=>'%'.$args['search'].'%'
+        )
+    );
+    
+    if($results && $get_results->rowCount() > 0){
+        return $get_results;
+    }else{
+        return false;
+    }
+}
