@@ -32,9 +32,6 @@
         );
         $getProducts = getProductsBySearch($args);
 
-        // var_dump($getProducts);
-        // // var_dump($getProducts->fetch(PDO::FETCH_ASSOC));
-
         if(!$getProducts){
             $message = 'No items found. Check your spelling?';
         }else{
