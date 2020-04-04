@@ -26,6 +26,9 @@ if (isset($_POST['submit'])) {
         'id' => $_POST['id']
     );
 
+    // var_dump($product);
+    // exit;
+
     $result  = updateProduct($product);
     $message = $result;
 }
@@ -43,7 +46,7 @@ if (isset($_POST['submit'])) {
     <?php if ($current_product):?>
         <?php while($product_info = $current_product->fetch(PDO::FETCH_ASSOC)):?>
 
-        <input name="id" value="Product ID - <?php echo $product_info['product_id'];?>" readonly class="product-id">
+        <input name="id" value="<?php echo $product_info['product_id'];?>" readonly class="product-id">
         
         <img src="../images/<?php echo $product_info['product_image'];?>" alt="Current Product Image" class="product-image-thumb">
 
